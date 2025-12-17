@@ -68,7 +68,7 @@ function randomMovie() {
                     $('#show_Poster').append(`
                 <img src="https://image.tmdb.org/t/p/w300_and_h450_bestv2/${data.results[randomResult].poster_path}"  id="img" crossorigin="anonymous" onerror=this.src="./assets/images/poster_not_found.png" >
                  `);
-                    setTimeout(function () {
+                    setTimeout(function (300) {
                         getPalette("#img")
                     })
                     // if poster not found, it grabs out alt img.   
