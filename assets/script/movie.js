@@ -75,7 +75,7 @@ function randomMovie() {
                 } else {
                     $('#show_Poster').append(`
                 <img src="./assets/images/poster_not_found.png"  id="img" crossorigin="anonymous">
-                 `), 3000;
+                 `), 300;
                 }
 
                 // appends the movie title
