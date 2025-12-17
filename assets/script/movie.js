@@ -70,7 +70,7 @@ function randomMovie() {
                  `);
                     setTimeout(function () {
                         getPalette("#img")
-                    }, 100)
+                    })
                     // if poster not found, it grabs out alt img.   
                 } else {
                     $('#show_Poster').append(`
