@@ -66,7 +66,7 @@ function randomMovie() {
                 // appends the poster and sets color pallet
                 if (data.results[randomResult]) {
                     $('#show_Poster').append(`
-                <img src="https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${data.results[randomResult].poster_path}"  id="img" crossorigin="anonymous" onerror=this.src="./assets/images/poster_not_found.png" >
+                <img src="https://image.tmdb.org/t/p/w300_and_h450_bestv2/${data.results[randomResult].poster_path}"  id="img" crossorigin="anonymous" onerror=this.src="./assets/images/poster_not_found.png" >
                  `);
                     setTimeout(function () {
                         getPalette("#img")
