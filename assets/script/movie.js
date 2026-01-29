@@ -145,26 +145,26 @@ function randomMovie() {
                     // TRAILER
                     // =======================
 
-                    var recURL =
-                        `https://wendy-cors.herokuapp.com/https://tastedive.com/api/similar?q=${movie.original_title.toUpperCase()}` +
-                        `&type=movies&limit=1&verbose=1&k=410241-WhattoWa-74TU2L6X`;
+                    $('#show_Trailer').empty(); // clear old trailer
 
-                    fetch(recURL)
-                        .then(res => res.json())
-                        .then(query => {
-                            if (query.Similar?.Info) {
-                                $('#show_Trailer').append(`
-                                    <iframe width="560" height="315"
-                                        src="${query.Similar.Info[0].yUrl}"
-                                        frameborder="0"
-                                        allowfullscreen>
-                                    </iframe>
-                                `);
-                            } else {
-                                $('#show_Trailer').append(`<img src="./assets/images/no_trailer.png">`);
-                            }
-                        });
-
+                    if(response.videos && response.videos.results.length > 0) {
+                        // Find first YouTube trailer
+                        const trailer = response.videos.results.find(v => v.type === "Trailer" && v.site === "YouTube");
+                        if(trailer) {
+                            $('#show_Trailer').append(`
+                                <iframe width="560" height="315" 
+                                    src="https://www.youtube.com/embed/${trailer.key}" 
+                                    title="YouTube video player" frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                                </iframe>
+                            `);
+                        } else {
+                            $('#show_Trailer').append(`<img src="./assets/images/no_trailer.png" alt="no trailer">`);
+                        }
+                    } else {
+                        $('#show_Trailer').append(`<img src="./assets/images/no_trailer.png" alt="no trailer">`);
+                    }
+                    
                     // =======================
                     // MOVIE DETAILS (CAST + PROVIDERS)
                     // =======================
