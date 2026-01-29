@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -10,214 +11,111 @@
   <link rel="stylesheet" href="assets/style.css">
 </head>
 
-<body class = "homepage-color">
-  <section class="section ">
+<body class="homepage-color">
+  <section class="section">
     <div class="container">
       <div class="card has-text-centered WtW_color">
-        <div class="card-content has-text-centered ">
-          <img class = "WtW_img" src="./assets/images/what_to_watch.png" alt="what_to_watch logo photo" >
+        <div class="card-content has-text-centered">
+          <img class="WtW_img" src="./assets/images/what_to_watch.png" alt="what_to_watch logo photo">
           <button class="button" id="genreBtn">Show Genre</button>
           <button class="button" id="decadeBtn">Decades</button>
-
         </div>
 
-        <!-- genre button list -->
+        <!-- Genre checkboxes -->
         <div id="genreBox" style="display: none;">
           <div class="column">
             <p class="bd-notification is-info m-3 is-size-4">Pick your Genre</p>
             <div class="columns">
-              <div class="column ">
-                <label class="checkbox">
-                  <input type="checkbox" value='&with_genres=28' class="checks">
-                  Action
-                </label>
-              </div>
-              <div class="column">
-                <label class="checkbox bd-notification is-info ">
-                  <input type="checkbox" value='&with_genres=12' class="checks">
-                  Adventure
-                </label>
-              </div>
-              <div class="column">
-                <label class="checkbox bd-notification is-info">
-                  <input type="checkbox" value='&with_genres=16' class="checks">
-                  Animation
-                </label>
-              </div>
-              <div class="column">
-                <label class="checkbox bd-notification is-info">
-                  <input type="checkbox" value='&with_genres=35' class="checks">
-                  Comedy
-                </label>
-              </div>
-              <div class="column">
-                <label class="checkbox bd-notification is-info">
-                  <input type="checkbox" value='&with_genres=80'>
-                  Crime
-                </label>
-              </div>
+              <div class="column"><label class="checkbox"><input type="checkbox" value='&with_genres=28' class="checks"> Action</label></div>
+              <div class="column"><label class="checkbox"><input type="checkbox" value='&with_genres=12' class="checks"> Adventure</label></div>
+              <div class="column"><label class="checkbox"><input type="checkbox" value='&with_genres=16' class="checks"> Animation</label></div>
+              <div class="column"><label class="checkbox"><input type="checkbox" value='&with_genres=35' class="checks"> Comedy</label></div>
+              <div class="column"><label class="checkbox"><input type="checkbox" value='&with_genres=80' class="checks"> Crime</label></div>
             </div>
           </div>
-          <!-- 2nd row of genre tags -->
           <div class="column">
-            <div class="columns ">
-              <div class="column">
-                <label class="checkbox">
-                  <input type="checkbox" value='&with_genres=99'>
-                  Documentary
-                </label>
-              </div>
-              <div class="column">
-                <label class="checkbox bd-notification is-info">
-                  <input type="checkbox" value='&with_genres=18'>
-                  Drama
-                </label>
-              </div>
-              <div class="column">
-                <label class="checkbox bd-notification is-info">
-                  <input type="checkbox" value='&with_genres=10751'>
-                  Family
-                </label>
-              </div>
-              <div class="column">
-                <label class="checkbox bd-notification is-info">
-                  <input type="checkbox" value='&with_genres=14'>
-                  Fantasy
-                </label>
-              </div>
-              <div class="column">
-                <label class="checkbox bd-notification is-info">
-                  <input type="checkbox" value='&with_genres=36'>
-                  History
-                </label>
-              </div>
+            <div class="columns">
+              <div class="column"><label class="checkbox"><input type="checkbox" value='&with_genres=99' class="checks"> Documentary</label></div>
+              <div class="column"><label class="checkbox"><input type="checkbox" value='&with_genres=18' class="checks"> Drama</label></div>
+              <div class="column"><label class="checkbox"><input type="checkbox" value='&with_genres=10751' class="checks"> Family</label></div>
+              <div class="column"><label class="checkbox"><input type="checkbox" value='&with_genres=14' class="checks"> Fantasy</label></div>
+              <div class="column"><label class="checkbox"><input type="checkbox" value='&with_genres=36' class="checks"> History</label></div>
             </div>
           </div>
-          <!-- 3rd row of genre -->
           <div class="column">
-            <div class="columns ">
-              <div class="column">
-                <label class="checkbox">
-                  <input type="checkbox" value='&with_genres=27'>
-                  Horror
-                </label>
-              </div>
-              <div class="column">
-                <label class="checkbox bd-notification is-info">
-                  <input type="checkbox" value='&with_genres=10402'>
-                  Music
-                </label>
-              </div>
-              <div class="column">
-                <label class="checkbox bd-notification is-info">
-                  <input type="checkbox" value='&with_genres=9648'>
-                  Mystery
-                </label>
-              </div>
-              <div class="column">
-                <label class="checkbox bd-notification is-info">
-                  <input type="checkbox" value='&with_genres=10749'>
-                  Romance
-                </label>
-              </div>
-              <div class="column">
-                <label class="checkbox bd-notification is-info">
-                  <input type="checkbox" value='&with_genres=878'>
-                  Science Fiction
-                </label>
-              </div>
+            <div class="columns">
+              <div class="column"><label class="checkbox"><input type="checkbox" value='&with_genres=27' class="checks"> Horror</label></div>
+              <div class="column"><label class="checkbox"><input type="checkbox" value='&with_genres=10402' class="checks"> Music</label></div>
+              <div class="column"><label class="checkbox"><input type="checkbox" value='&with_genres=9648' class="checks"> Mystery</label></div>
+              <div class="column"><label class="checkbox"><input type="checkbox" value='&with_genres=10749' class="checks"> Romance</label></div>
+              <div class="column"><label class="checkbox"><input type="checkbox" value='&with_genres=878' class="checks"> Science Fiction</label></div>
             </div>
           </div>
-          <!-- 4th row of genre -->
           <div class="column">
-            <div class="columns ">
-              <div class="column">
-                <label class="checkbox bd-notification is-info">
-                  <input type="checkbox" value='&with_genres=10770'>
-                  TV Movie
-                </label>
-              </div>
-              <div class="column">
-                <label class="checkbox bd-notification is-info">
-                  <input type="checkbox" value='&with_genres=53'>
-                  Thriller
-                </label>
-              </div>
-              <div class="column">
-                <label class="checkbox bd-notification is-info">
-                  <input type="checkbox" value='&with_genres=10752'>
-                  War
-                </label>
-              </div>
-              <div class="column">
-                <label class="checkbox bd-notification is-info">
-                  <input type="checkbox" value='&with_genres=37'>
-                  Western
-                </label>
-              </div>
+            <div class="columns">
+              <div class="column"><label class="checkbox"><input type="checkbox" value='&with_genres=10770' class="checks"> TV Movie</label></div>
+              <div class="column"><label class="checkbox"><input type="checkbox" value='&with_genres=53' class="checks"> Thriller</label></div>
+              <div class="column"><label class="checkbox"><input type="checkbox" value='&with_genres=10752' class="checks"> War</label></div>
+              <div class="column"><label class="checkbox"><input type="checkbox" value='&with_genres=37' class="checks"> Western</label></div>
             </div>
           </div>
         </div>
 
-        <!-- end of genre list -->
-
-        <!-- decade buttons -->
+        <!-- Decade checkboxes -->
         <div id="decadeBox" style="display: none;">
           <div class="column">
-            <p class="bd-notification is-info m-3 is-size-4" style="position:relative; bottom:20px;">Pick your
-              Decade</p>
-            <div class="columns ">
-              <div class="column">
-                <label class="checkbox">
-                  <input type="checkbox"
-                    value="&primary_release_date.gte=1970-01-01&primary_release_date.lte=1979-12-31" class="checks">
-                  70's
-                </label>
-              </div>
-              <div class="column">
-                <label class="checkbox bd-notification is-info">
-                  <input type="checkbox"
-                    value="&primary_release_date.gte=1980-01-01&primary_release_date.lte=1989-12-31" class="checks">
-                  80's
-                </label>
-              </div>
-              <div class="column">
-                <label class="checkbox bd-notification is-info">
-                  <input type="checkbox"
-                    value="&primary_release_date.gte=1990-01-01&primary_release_date.lte=1999-12-31" class="checks">
-                  90's
-                </label>
-              </div>
-              <div class="column">
-                <label class="checkbox bd-notification is-info">
-                  <input type="checkbox"
-                    value='&primary_release_date.gte=2000-01-01&primary_release_date.lte=2009-12-31' class="checks">
-                  2000's
-                </label>
-              </div>
-              <div class="column">
-                <label class="checkbox bd-notification is-info">
-                  <input type="checkbox"
-                    value='&primary_release_date.gte=2010-01-01&primary_release_date.lte=2019-12-31' class="checks">
-                  2010's
-                </label>
-              </div>
+            <p class="bd-notification is-info m-3 is-size-4">Pick your Decade</p>
+            <div class="columns">
+              <div class="column"><label class="checkbox"><input type="checkbox" value="&primary_release_date.gte=1970-01-01&primary_release_date.lte=1979-12-31" class="checks"> 70's</label></div>
+              <div class="column"><label class="checkbox"><input type="checkbox" value="&primary_release_date.gte=1980-01-01&primary_release_date.lte=1989-12-31" class="checks"> 80's</label></div>
+              <div class="column"><label class="checkbox"><input type="checkbox" value="&primary_release_date.gte=1990-01-01&primary_release_date.lte=1999-12-31" class="checks"> 90's</label></div>
+              <div class="column"><label class="checkbox"><input type="checkbox" value='&primary_release_date.gte=2000-01-01&primary_release_date.lte=2009-12-31' class="checks"> 2000's</label></div>
+              <div class="column"><label class="checkbox"><input type="checkbox" value='&primary_release_date.gte=2010-01-01&primary_release_date.lte=2019-12-31' class="checks"> 2010's</label></div>
             </div>
           </div>
         </div>
+
+        <!-- Generate and Clear buttons -->
         <button class="button" id="movieBtn">Generate Movie</button>
         <button class="button" id="clearBoxes">Clear</button>
-        
+
       </div>
     </div>
-
-
-
-
   </section>
-  <!-- Jquery script and js link -->
+
+  <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script src="./assets/script/script.js"></script>
+  
+  <script>
+    // Toggle Genre and Decade boxes
+    $('#genreBtn').click(() => $('#genreBox').toggle());
+    $('#decadeBtn').click(() => $('#decadeBox').toggle());
+
+    // Clear all checkboxes
+    $('#clearBoxes').click(() => $('input[type="checkbox"]').prop('checked', false));
+
+    // Generate Movie button
+    $('#movieBtn').click(() => {
+      let selectedFilters = '';
+
+      // Collect selected genres
+      $('#genreBox input[type="checkbox"]:checked').each(function () {
+        selectedFilters += this.value;
+      });
+
+      // Collect selected decades
+      $('#decadeBox input[type="checkbox"]:checked').each(function () {
+        selectedFilters += this.value;
+      });
+
+      // Save filters to localStorage (empty string if none selected)
+      localStorage.setItem('checked', selectedFilters);
+
+      // Redirect to movie page
+      window.location.href = './movie.html'; // Make sure this points to your actual movie page
+    });
+  </script>
+
 </body>
 
 </html>
