@@ -74,14 +74,17 @@ $(document).ready(function() {
         $('#platform_Name,#platform_Logo').empty();
         $('#show_Trailer').empty();
 
-        var selected = localStorage.getItem('checked');
+        var selected = localStorage.getItem('checked') || "";
 
+        // Only append selected filters if they are non‑empty
+        var filterPart = selected.trim() !== "" ? selected : "";
+        
         var apiURL =
             `https://api.themoviedb.org/3/discover/movie?api_key=2d68f36569896b3eca3f4d442ec3c9a3` +
             `&language=en-US&sort_by=popularity.desc&vote_count.gte=10` +
             `&with_original_language=en&certification_country=US` +
             `&include_adult=false&watch_region=US` +
-            selected;
+            filterPart;
 
         fetch(apiURL)
             .then(res => res.json())
