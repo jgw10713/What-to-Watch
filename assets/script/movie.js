@@ -22,7 +22,7 @@ $("#modal-Bg").click(function () {
 // Generates color palette from poster img
 var thief = new ColorThief();
 function getPalette(selector) {
-    var img = document.querySelector(selector);
+    var img = document.querySelector(selector)
     var colors = thief.getColor(img);
     var palette = thief.getPalette(img, 8);
     console.log(colors);
@@ -36,33 +36,34 @@ function getPalette(selector) {
 }
 
 function randomMovie() {
-    // Clear old data
+
+    // clear old data
     $('#show_Poster, #show_Title, #show_Desc, #show_Release, #user_Rating, #show_Genre, #runTime, #actor1, #actor2, #actor3, #actor4, #actor5, #actor6, #character1, #character2, #character3, #character4, #character5, #character6, #img_Actor1, #img_Actor2, #img_Actor3, #img_Actor4, #img_Actor5, #img_Actor6, #platform_Name, #platform_Logo, #show_Trailer').empty();
 
     var selected = localStorage.getItem('checked') || '';
-    var apiURL = `https://api.themoviedb.org/3/discover/movie?api_key=2d68f36569896b3eca3f4d442ec3c9a3&language=en-US&sort_by=popularity.desc&vote_count.gte=10&with_original_language=en&certification_country=US&include_adult=false&watch_region=US${selected}`;
 
-    // Step 1: fetch first page to get total pages
-    fetch(`${apiURL}&page=1`)
-        .then(res => res.json())
+    var apiURL = `https://api.themoviedb.org/3/discover/movie?api_key=2d68f36569896b3eca3f4d442ec3c9a3&language=en-US&sort_by=popularity.desc&vote_count.gte=10&with_original_language=en&certification_country=US&include_adult=false&watch_region=US` + selected;
+
+    fetch(apiURL)
+        .then(data => data.json())
         .then(data => {
-            var totalPages = Math.min(data.total_pages, 500); // TMDB max page = 500
-            var randomPage = Math.floor(Math.random() * totalPages) + 1;
+            console.log(data);
+            var random = Math.floor(Math.random() * data.total_results);
+            var randomPage = Math.ceil(random / 20);
+            var ranUrlPage = '&page=';
+            var randomResult = random % 20;
 
-            // Step 2: fetch random page
-            fetch(`${apiURL}&page=${randomPage}`)
-                .then(res => res.json())
+            fetch(`${apiURL}${ranUrlPage}${randomPage}`)
+                .then(data => data.json())
                 .then(data => {
-                    // Step 3: pick a random movie that has a poster
-                    var moviesWithPosters = data.results.filter(m => m.poster_path);
-                    if (moviesWithPosters.length === 0) return;
+                    var movie = data.results[randomResult];
+                    if (!movie) return;
 
-                    var movie = moviesWithPosters[Math.floor(Math.random() * moviesWithPosters.length)];
-                    console.log("Random movie:", movie);
-
-                    // Poster
+                    // --- Poster with proper onload for ColorThief ---
                     var posterImg = document.createElement('img');
-                    posterImg.src = `https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${movie.poster_path}`;
+                    posterImg.src = movie.poster_path 
+                        ? `https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${movie.poster_path}`
+                        : './assets/images/poster_not_found.png';
                     posterImg.id = "img";
                     posterImg.crossOrigin = "anonymous";
                     posterImg.onerror = function() { this.src = './assets/images/poster_not_found.png'; }
@@ -86,10 +87,10 @@ function randomMovie() {
                     // User rating
                     $('#user_Rating').append(`<p>${movie.vote_average}/10</p>`);
 
-                    // Movie details: cast, runtime, genres, trailer, watch providers
+                    // Movie details including cast, runtime, genres, trailer, watch providers
                     var movieURL = `https://api.themoviedb.org/3/movie/${movie.id}?api_key=2d68f36569896b3eca3f4d442ec3c9a3&language=en-US&append_to_response=credits,videos,watch/providers`;
                     fetch(movieURL)
-                        .then(res => res.json())
+                        .then(response => response.json())
                         .then(response => {
                             console.log(response);
 
@@ -102,7 +103,7 @@ function randomMovie() {
                             var min = response.runtime % 60;
                             $('#runTime').append(`<p>${hours}hr ${min}min</p>`);
 
-                            // Cast names, characters, images
+                            // Cast
                             for (let i = 0; i < 6; i++) {
                                 let castMember = response.credits.cast[i];
                                 $(`#actor${i+1}`).append(castMember ? castMember.name : 'no-cast').css('font-weight', 'bold');
@@ -117,7 +118,7 @@ function randomMovie() {
                                 ['flatrate','ads','rent'].forEach(type => {
                                     if(response["watch/providers"].results.US[type]) {
                                         let provider = response["watch/providers"].results.US[type][0];
-                                        $('#platform_Name').append(`<h1 class="is-size-5">${provider.provider_name}</h1>`);
+                                        $('#platform_Name').append(`<h1 class ="is-size-5">${provider.provider_name}</h1>`);
                                         $('#platform_Logo').append(`<img src="https://www.themoviedb.org/t/p/original${provider.logo_path}" alt="provider logo">`);
                                     }
                                 });
@@ -144,5 +145,5 @@ function randomMovie() {
         });
 }
 
-// Run on page load
+// Generate a random movie on page load
 randomMovie();
