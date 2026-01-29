@@ -61,6 +61,10 @@ function getPalette(img) {
 // RANDOM MOVIE
 // =======================
 
+// =======================
+// RANDOM MOVIE
+// =======================
+
 function randomMovie() {
 
     // clear previous data
@@ -142,7 +146,7 @@ function randomMovie() {
                     }
 
                     // =======================
-                    // MOVIE DETAILS (CAST + PROVIDERS + TRAILER)
+                    // MOVIE DETAILS (CAST + PROVIDERS + TRAILER + GENRE + RUNTIME)
                     // =======================
 
                     var movieURL =
@@ -153,11 +157,10 @@ function randomMovie() {
                         .then(res => res.json())
                         .then(response => {
 
-                            // --- TRAILER FIX START ---
+                            // --- TRAILER FIX ---
                             $('#show_Trailer').empty(); // clear old trailer
 
                             if (response.videos && response.videos.results.length > 0) {
-                                // Find first YouTube trailer
                                 const trailer = response.videos.results.find(v => v.type === "Trailer" && v.site === "YouTube");
                                 if (trailer) {
                                     $('#show_Trailer').append(`
@@ -174,6 +177,23 @@ function randomMovie() {
                                 $('#show_Trailer').append(`<img src="./assets/images/no_trailer.png" alt="no trailer">`);
                             }
                             // --- TRAILER FIX END ---
+
+                            // --- GENRES ---
+                            if (response.genres && response.genres.length > 0) {
+                                const genreNames = response.genres.map(g => g.name).join(', ');
+                                $('#show_Genre').text(genreNames);
+                            } else {
+                                $('#show_Genre').text('No genres available');
+                            }
+
+                            // --- RUNTIME ---
+                            if (response.runtime) {
+                                const hours = Math.floor(response.runtime / 60);
+                                const minutes = response.runtime % 60;
+                                $('#runTime').text(`${hours}h ${minutes}m`);
+                            } else {
+                                $('#runTime').text('Runtime not available');
+                            }
 
                             // CAST
                             for (let i = 0; i < 6; i++) {
@@ -217,6 +237,6 @@ function randomMovie() {
         });
 }
 
-
 randomMovie();
+
 
