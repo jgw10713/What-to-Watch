@@ -147,20 +147,19 @@ function randomMovie() {
 
                     var movieURL =
                         `https://api.themoviedb.org/3/movie/${movie.id}?api_key=2d68f36569896b3eca3f4d442ec3c9a3` +
-                        `&language=en-US&append_to_response=credits,videos,watch/providers`;
+                        `&language=en-US&append_to_response=credits,watch/providers,videos`;
 
                     fetch(movieURL)
                         .then(res => res.json())
                         .then(response => {
 
-                            // -----------------------
-                            // TRAILER FIX
-                            // -----------------------
+                            // --- TRAILER FIX START ---
                             $('#show_Trailer').empty(); // clear old trailer
 
-                            if(response.videos && response.videos.results.length > 0) {
+                            if (response.videos && response.videos.results.length > 0) {
+                                // Find first YouTube trailer
                                 const trailer = response.videos.results.find(v => v.type === "Trailer" && v.site === "YouTube");
-                                if(trailer) {
+                                if (trailer) {
                                     $('#show_Trailer').append(`
                                         <iframe width="560" height="315" 
                                             src="https://www.youtube.com/embed/${trailer.key}" 
@@ -174,10 +173,9 @@ function randomMovie() {
                             } else {
                                 $('#show_Trailer').append(`<img src="./assets/images/no_trailer.png" alt="no trailer">`);
                             }
+                            // --- TRAILER FIX END ---
 
-                            // -----------------------
                             // CAST
-                            // -----------------------
                             for (let i = 0; i < 6; i++) {
                                 if (response.credits?.cast?.[i]) {
                                     $(`#actor${i + 1}`).text(response.credits.cast[i].name).css('font-weight', 'bold');
@@ -193,9 +191,7 @@ function randomMovie() {
                                 }
                             }
 
-                            // -----------------------
                             // WATCH PROVIDERS
-                            // -----------------------
                             const providers = response["watch/providers"]?.results?.US;
 
                             if (!providers) {
@@ -220,6 +216,7 @@ function randomMovie() {
                 });
         });
 }
+
 
 randomMovie();
 
