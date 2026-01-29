@@ -60,11 +60,16 @@ function randomMovie() {
                     var movie = data.results[randomResult];
                     if (!movie) return;
 
-                    // Poster
-                    $('#show_Poster').append(`
-                        <img src="https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${movie.poster_path}" id="img" crossorigin="anonymous" onerror=this.src="./assets/images/poster_not_found.png">
-                    `);
-                    setTimeout(() => getPalette("#img"), 500);
+                    // Poster with onload to ensure ColorThief works
+                    var posterImg = document.createElement('img');
+                    posterImg.src = movie.poster_path 
+                        ? `https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${movie.poster_path}`
+                        : './assets/images/poster_not_found.png';
+                    posterImg.id = "img";
+                    posterImg.crossOrigin = "anonymous";
+                    posterImg.onerror = function() { this.src = './assets/images/poster_not_found.png'; }
+                    posterImg.onload = function() { getPalette("#img"); }
+                    $('#show_Poster').append(posterImg);
 
                     // Title
                     $('#show_Title').append(movie.title.toUpperCase());
@@ -99,7 +104,7 @@ function randomMovie() {
                             var min = response.runtime % 60;
                             $('#runTime').append(`<p>${hours}hr ${min}min</p>`);
 
-                            // Cast names
+                            // Cast names, characters, and images
                             for (let i = 0; i < 6; i++) {
                                 let castMember = response.credits.cast[i];
                                 $(`#actor${i+1}`).append(castMember ? castMember.name : 'no-cast').css('font-weight', 'bold');
